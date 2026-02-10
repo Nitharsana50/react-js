@@ -1,0 +1,45 @@
+import React ,{useState,useEffect}from 'react'
+
+function Fakestoreapi() {
+     const [product,setProduct]=useState([]);
+     useEffect(()=>{
+         fetch('https://fakestoreapi.com/products')
+         .then(res=>res.json())
+         .then(data=>setProduct(data))
+     },[])
+    return(
+        <div style={Styles.container}>
+            {product.map((Display)=>(           
+            <div key={Display.id} style={Styles.card}>
+                 <img src={Display.image} alt="" style={Styles.img} />
+                 <p><b>Price</b>{Display.price}</p>
+                 <p style={{fontSize:"14px"}}><b>Category</b>{Display.category}</p>
+                 <p style={{fontSize:"14px"}}><b>Description</b>{Display.description}</p>
+            </div>
+            ))}
+        
+        </div>
+    )
+}
+const Styles={
+    container:{
+        display:"flex",
+        flexwrap:"wrap",
+        gap:"20px",
+        justifyContent:"center"
+
+    },
+    card:{
+        marin:"20px auto",
+        width:"200px",
+        border:"1px solid",
+        padding:"15px",
+        height:"100px"
+    },
+    img:{
+        height:"100%",
+        width:"200px",
+        objectFit:"contain"
+    }
+}
+export default Fakestoreapi;
